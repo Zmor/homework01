@@ -1,0 +1,63 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/homework01?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
+    username: gientest
+    password: SecretPassword@123
+  redis:
+    host: localhost
+    port: 6379
+    password: SecretPassword@123
+    database: 0
+    lettuce:
+      pool:
+        enabled: true
+        max-active: 8
+        max-idle: 8
+        max-wait: 10000
+    cache:
+      type: redis
+      redis:
+        cache-null-values: true
+
+# rocketmq配置
+rocketmq:
+  nameServer: localhost:9876
+  producer:
+    group: my-group
+    send-message-timeout: 30000
+
+# feign配置
+feign:
+  client:
+    config:
+      feignName:
+        connectTimeout: 30000
+        readTimeout: 30000
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+  httpclient:
+    enabled: false
+    max-connections: 1000
+    max-connections-per-route: 100
+  hystrix:
+    enabled: false
+  okhttp:
+    enabled: true
+  sentinel:
+    enabled: true
+
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.central.common.model
+  global-config:
+    db-config:
+      id-type: auto
